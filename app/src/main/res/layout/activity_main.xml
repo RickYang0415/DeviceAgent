@@ -13,55 +13,72 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1"
-        android:orientation="vertical"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Address"
-            android:ems="10"
-            android:id="@+id/editText" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="82dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Address:"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical|center_horizontal" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:hint="IP:Port"
+                android:id="@+id/editText1" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/editText2"
             android:layout_weight="0.86"
-            android:scrollbars="vertical"
+            android:ems="10"
+            android:inputType="textMultiLine"
             android:maxLines="25"
+            android:scrollbars="vertical"
             android:textAlignment="textStart" />
 
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <Button
-                android:text="Connect"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:layout_weight="0.23"
-                android:layout_marginStart="40dp"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:layout_marginStart="40dp"
+                android:layout_weight="0.23"
+                android:text="Connect" />
 
             <Button
-                android:text="Disconnect"
+                android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:layout_weight="0.23"
-                android:layout_marginEnd="40dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_marginEnd="40dp"
+                android:layout_weight="0.23"
+                android:text="Disconnect" />
 
         </RelativeLayout>
 

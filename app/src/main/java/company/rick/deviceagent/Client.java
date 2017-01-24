@@ -118,7 +118,8 @@ public class Client implements Runnable {
             while (!stopThread) {
                 try {
                     DeviceInfo deviceInfo = deviceInformation.GetDeviceInfo();
-                    String msg = String.format("%d|%s,%s,%s,%s", Command.Observing.ordinal(), deviceInfo.serialNumber, deviceInfo.use_cpu, deviceInfo.memory, deviceInfo.address);
+                    String msg = String.format("%d|%s,%s,%s,%s,%s", Command.Observing.ordinal(), deviceInfo.serialNumber, deviceInfo.modelName, deviceInfo.cpu, deviceInfo.memory, deviceInfo.address);
+                    Log.d("Send", msg);
                     InetAddress IPAddress = InetAddress.getByName(m_ip);
                     DatagramPacket sendPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, IPAddress, m_port);
                     m_socket.send(sendPacket);

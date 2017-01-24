@@ -43,7 +43,7 @@ public class DeviceInformation {
         deviceInfo.modelName = Build.MODEL;
         deviceInfo.memory = getMemoryInfo();
         deviceInfo.address = GetDeviceConnectedAddress();
-        //getCpuInfo();
+        deviceInfo.cpu = getCpuInfo();
         return deviceInfo;
     }
 
@@ -162,7 +162,6 @@ class DeviceInfo {
     String serialNumber;
     String modelName;
     String address;
-    String total_cpu = "10000";
-    String use_cpu = "5000";
+    String cpu;
     String memory;
 }
