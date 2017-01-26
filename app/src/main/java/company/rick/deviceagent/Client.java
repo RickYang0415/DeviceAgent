@@ -15,7 +15,8 @@ import java.net.SocketTimeoutException;
 
 enum Command {
     Connect,
-    Disconncet,
+    Connect_Success,
+    Disconnect,
     Observe,
     Stop_Observe,
     Observing
@@ -76,10 +77,12 @@ public class Client implements Runnable {
                     Log.d("LOG", "Stop Observing");
                     observerThread.SetStopFlag();
                     ((Activity) m_contex).runOnUiThread(new UpdateUIRunnable("Server stop observe"));
+                } else if (Integer.valueOf(arg[0]) == Command.Connect_Success.ordinal()) {
+                    ((Activity) m_contex).runOnUiThread(new UpdateUIRunnable("Connect Success"));
                 }
             }
             ((Activity) m_contex).runOnUiThread(new UpdateUIRunnable("Disconnect..."));
-            msg = String.format("%d|%s", Command.Disconncet.ordinal(), deviceInfo.serialNumber);
+            msg = String.format("%d|%s", Command.Disconnect.ordinal(), deviceInfo.serialNumber);
             sendPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, IPAddress, m_port);
             m_socket.send(sendPacket);
         } catch (Exception ex) {
@@ -92,6 +95,8 @@ public class Client implements Runnable {
     }
 
     void Stop() {
+        if (observerThread != null)
+            observerThread.SetStopFlag();
         m_stop = true;
     }
 

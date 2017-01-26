@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String value = textView1.getText().toString();
-                if(value.equals(""))
+                if (value.equals(""))
                     return;
                 String[] arg = value.split(":", -1);
                 if (arg.length != 2)
@@ -71,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        client.Stop();
     }
 }
