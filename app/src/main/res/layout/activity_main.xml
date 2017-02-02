@@ -40,7 +40,8 @@
                 android:layout_height="match_parent"
                 android:textSize="18sp"
                 android:hint="IP:Port"
-                android:id="@+id/editText1" />
+                android:id="@+id/editText1"
+                android:text="192.168.67.43:5488" />
         </LinearLayout>
 
         <TextView

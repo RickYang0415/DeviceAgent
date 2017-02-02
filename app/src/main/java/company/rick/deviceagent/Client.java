@@ -100,6 +100,17 @@ public class Client implements Runnable {
         m_stop = true;
     }
 
+    void Pause() {
+        if (observerThread != null)
+            observerThread.PauseObserve();
+    }
+
+    void Resume() {
+        if (observerThread != null)
+            observerThread.ResumeObserve();
+    }
+
+
     class UpdateUIRunnable implements Runnable {
         String msg = "";
 
@@ -117,23 +128,34 @@ public class Client implements Runnable {
 
     class ObserverDevice implements Runnable {
         private boolean stopThread = false;
+        private boolean pauseThread = false;
 
         @Override
         public void run() {
             while (!stopThread) {
                 try {
-                    DeviceInfo deviceInfo = deviceInformation.GetDeviceInfo();
-                    String msg = String.format("%d|%s,%s,%s,%s,%s", Command.Observing.ordinal(), deviceInfo.serialNumber, deviceInfo.modelName, deviceInfo.cpu, deviceInfo.memory, deviceInfo.address);
-                    Log.d("Send", msg);
-                    InetAddress IPAddress = InetAddress.getByName(m_ip);
-                    DatagramPacket sendPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, IPAddress, m_port);
-                    m_socket.send(sendPacket);
+                    if (!pauseThread) {
+                        DeviceInfo deviceInfo = deviceInformation.GetDeviceInfo();
+                        String msg = String.format("%d|%s,%s,%s,%s,%s", Command.Observing.ordinal(), deviceInfo.serialNumber, deviceInfo.modelName, deviceInfo.cpu, deviceInfo.memory, deviceInfo.address);
+                        Log.d("Send", msg);
+                        InetAddress IPAddress = InetAddress.getByName(m_ip);
+                        DatagramPacket sendPacket = new DatagramPacket(msg.getBytes(), msg.getBytes().length, IPAddress, m_port);
+                        m_socket.send(sendPacket);
+                    }
                     Thread.sleep(2000);
                 } catch (Exception ex) {
                     Log.d("LOG", ex.toString());
                 }
             }
             Log.d("LOG", "ObserverDevice stop");
+        }
+
+        public void PauseObserve() {
+            this.pauseThread = true;
+        }
+
+        public void ResumeObserve() {
+            this.pauseThread = false;
         }
 
         void SetStopFlag() {

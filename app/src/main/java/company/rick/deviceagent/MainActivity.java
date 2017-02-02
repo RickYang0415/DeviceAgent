@@ -76,6 +76,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        client.Stop();
+        if (client != null) {
+            client.Stop();
+            client = null;
+        }
+        button1.setEnabled(true);
+        textView1.setEnabled(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (client != null)
+            client.Pause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (client != null)
+            client.Resume();
     }
 }
