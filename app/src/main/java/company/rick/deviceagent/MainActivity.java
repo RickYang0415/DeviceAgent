@@ -1,5 +1,6 @@
 package company.rick.deviceagent;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -96,5 +97,10 @@ public class MainActivity extends AppCompatActivity {
         super.onPostResume();
         if (client != null)
             client.Resume();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 }
